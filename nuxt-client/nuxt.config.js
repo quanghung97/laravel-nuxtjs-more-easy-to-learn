@@ -6,10 +6,26 @@ module.exports = {
   */
   modules: [
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
 
     // Or if you have custom bootstrap CSS...
     ['bootstrap-vue/nuxt', { css: false }],
   ],
+  axios: {
+    baseURL: 'http://localhost/vuejs-laravel-learning/laravel-nuxtjs-more-easy-to-learn/public/api'
+  },
+  auth: {
+  strategies: {
+    local: {
+      endpoints: {
+        login: { url: 'login', method: 'post', propertyName: 'meta.token' },
+        user: { url: 'user', method: 'get', propertyName: 'data' },
+        logout: {}
+      }
+    }
+  }
+  },
   head: {
     title: 'nuxt-client',
     meta: [
