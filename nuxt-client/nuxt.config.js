@@ -34,6 +34,7 @@ module.exports = {
         })
       }
     }
-  }
+    },
+    css: ['./node_modules/bootstrap/dist/css/bootstrap.css'],
+    plugins: ['~plugins/bootstrap.js']
 }
-
