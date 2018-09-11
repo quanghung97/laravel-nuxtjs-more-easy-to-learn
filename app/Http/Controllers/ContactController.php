@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Http\Resources\Contact as ContactResource;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = request()->user()->contacts;
+
+        return ContactResource::collection($contacts);
     }
 
     /**
@@ -35,18 +43,9 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $contact = $request->user()->contacts()->create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
+        return ContactResource::collection($contact);
     }
 
     /**
@@ -69,7 +68,18 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        if ($request->user()->id !== $contact->user_id) {
+            return response()->json(['error' => 'Unauthorized action'], 401);
+        } else {
+            $contact->create($request->all());
+
+            return new ContactResource($contact);
+        }
+    }
+
+    public function show(Contact $contact)
+    {
+        return new ContactResource($contact);
     }
 
     /**
@@ -80,6 +90,12 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        if (request()->user()->id !== $contact->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $contact = $contact->delete();
+
+        return response()->json(null, 200);
     }
 }
