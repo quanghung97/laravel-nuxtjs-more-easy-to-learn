@@ -1,31 +1,6 @@
 const webpack = require('webpack')
 
 module.exports = {
-  /*
-  ** Headers of the page
-  */
-  modules: [
-    'bootstrap-vue/nuxt',
-    '@nuxtjs/axios',
-    '@nuxtjs/auth',
-
-    // Or if you have custom bootstrap CSS...
-    ['bootstrap-vue/nuxt', { css: false }],
-  ],
-  axios: {
-    baseURL: 'http://localhost/vuejs-laravel-learning/laravel-nuxtjs-more-easy-to-learn/public/api'
-  },
-  auth: {
-  strategies: {
-    local: {
-      endpoints: {
-        login: { url: 'login', method: 'post', propertyName: 'meta.token' },
-        user: { url: 'user', method: 'get', propertyName: 'data' },
-        logout: {}
-      }
-    }
-  }
-  },
   head: {
     title: 'nuxt-client',
     meta: [
@@ -34,18 +9,17 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'stylesheet', type: 'text/css', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'}
+
     ]
   },
-  /*
-  ** Customize the progress bar color
-  */
+
   loading: { color: '#3B8070' },
-  /*
-  ** Build configuration
-  */
+
+  modules: ['@nuxtjs/axios', 'bootstrap-vue/nuxt'],
   build: {
-    vendor: ['jquery', 'bootstrap'],
+    vendor: ['jquery'],
     plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
@@ -63,7 +37,5 @@ module.exports = {
         })
       }
     }
-    },
-    css: ['./node_modules/bootstrap/dist/css/bootstrap.css'],
-    plugins: ['~plugins/bootstrap.js', '~plugins/mixins/user.js']
+  }
 }

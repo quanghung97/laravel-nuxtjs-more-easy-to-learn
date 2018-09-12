@@ -25,7 +25,7 @@ class AuthController extends Controller
         $user->save();
 
         $guzzle = new Client;
-
+        //create token for user
         $response = $guzzle->post(url('oauth/token'), [
             'form_params' => [
                 'grant_type' => 'password',
@@ -37,7 +37,7 @@ class AuthController extends Controller
             ],
         ]);
 
-        return response(['data' => json_decode((string) $response->getBody(), true)]);
+        return response(['data' => json_decode((string) $response->getBody(), true), 'user' => $user]);
     }
 
     public function login(Request $request)

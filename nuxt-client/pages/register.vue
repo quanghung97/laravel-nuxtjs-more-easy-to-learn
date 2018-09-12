@@ -6,12 +6,12 @@
                 <div class="card-header">Register</div>
 
                 <div class="card-body">
-                    <form @submit.prevent="registerUser">
+                    <form @submit.prevent="registerUser(userInfo)">
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" v-model="userForm.name" required autofocus>
+                                <input type="text" class="form-control" v-model="userInfo.name" required autofocus>
                                     <span class="invalid-feedback" role="alert">
                                         <strong></strong>
                                     </span>
@@ -22,7 +22,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" v-model="userForm.email" required>
+                                <input type="email" class="form-control" v-model="userInfo.email" required>
                                     <span class="invalid-feedback" role="alert">
                                         <strong></strong>
                                     </span>
@@ -32,7 +32,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
-                                <input type="password" class="form-control" v-model="userForm.password" required>
+                                <input type="password" class="form-control" v-model="userInfo.password" required>
                                     <span class="invalid-feedback" role="alert">
                                         <strong></strong>
                                     </span>
@@ -54,29 +54,26 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
     data() {
         return {
-            userForm: {
+            userInfo: {
                 name: '',
                 email: '',
                 password: ''
             }
         }
     },
+    computed: {
+        ...mapState('auth', {
+            checkLogin: state => state.checkLogin
+        })
+    },
     methods: {
-        async registerUser() {
-            await this.$axios.post('register', this.userForm);
-            this.$auth.login({
-                data: {
-                    email: this.userForm.email,
-                    password: this.userForm.password
-                }
-            })
-            this.$router.push({
-                path: '/'
-            });
-        }
+        ...mapActions({
+            registerUser: 'auth/goRegister'
+        }),
     }
 }
 </script>
