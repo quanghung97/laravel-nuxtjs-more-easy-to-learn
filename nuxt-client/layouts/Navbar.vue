@@ -15,31 +15,29 @@
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
 
-
-      <b-nav-item-dropdown text="Lang" right>
-        <b-dropdown-item href="#">EN</b-dropdown-item>
-        <b-dropdown-item href="#">ES</b-dropdown-item>
-        <b-dropdown-item href="#">RU</b-dropdown-item>
-        <b-dropdown-item href="#">FA</b-dropdown-item>
+         <b-nav-item v-if="!checkLogin" :to="{ name: 'login' }">Login</b-nav-item>
+      <b-nav-item-dropdown v-if="checkLogin" text="User" right>
+        <b-dropdown-item @click.prevent="goLogout">Logout</b-dropdown-item>
       </b-nav-item-dropdown>
 
-      <b-nav-item-dropdown right>
-        <!-- Using button-content slot -->
-        <template slot="button-content">
-          <em>User</em>
-        </template>
 
-
-      </b-nav-item-dropdown>
-      <b-nav-item v-if="!loggedIn" :to="{ name: 'login' }">Login</b-nav-item>
-      <b-nav-item v-if="loggedIn" :to="{ name: 'logout' }">Logout</b-nav-item>
     </b-navbar-nav>
 
   </b-collapse>
 </b-navbar>
 </template>
 <script>
+import {mapState, mapActions} from 'vuex'
 export default {
-
+    computed: {
+        ...mapState('auth', {
+            checkLogin: state => state.checkLogin
+        })
+    },
+    methods: {
+        ...mapActions({
+            goLogout: 'auth/goLogout'
+        })
+    }
 }
 </script>

@@ -10,7 +10,7 @@ const createStore = () => {
     },
     getters: {
         authToken (state, getters) {
-            return state.auth.authToken;
+            return 'asasas';
         },
     }
   })

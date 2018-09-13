@@ -17,6 +17,9 @@ export default {
         },
         registered (state, token) {
             state.authToken = token
+        },
+        logout (state) {
+            state.checkLogin = false
         }
     },
     actions: {
@@ -42,7 +45,7 @@ export default {
                 console.log(error);
               });
               this.$router.push({
-                  path: '/'
+                  path: '/about'
               });
         },
         async goRegister({commit}, userInfo) {
@@ -62,6 +65,12 @@ export default {
             .catch(function (error) {
               console.log(error);
             });
+            this.$router.push({
+                path: '/about'
+            });
+        },
+        async goLogout({commit}) {
+            await commit('logout');
             this.$router.push({
                 path: '/'
             });
