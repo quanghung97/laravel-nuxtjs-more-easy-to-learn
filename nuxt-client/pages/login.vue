@@ -1,30 +1,48 @@
 <template>
   <div>
-    <b-form  @reset="onReset" v-if="!checkLogin">
-      <b-form-group id="exampleInputGroup1"
-                    label="Email:"
-                    label-for="exampleInput1"
-                    description="We'll never share your email with anyone else.">
-        <b-form-input id="exampleInput1"
-                      type="email"
-                      v-model="userInfo.email"
-                      required
-                      placeholder="Enter email">
-        </b-form-input>
-    </b-form-group>
-      <b-form-group id="exampleInputGroup2"
-                    label="Password:"
-                    label-for="exampleInput2">
-        <b-form-input id="exampleInput2"
-                      type="password"
-                      v-model="userInfo.password"
-                      required
-                      placeholder="Enter password">
-        </b-form-input>
-      </b-form-group>
-      <b-button @click="goLogin(userInfo)" type="button" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+      <b-form v-if="!checkLogin">
+    <b-container>
+        <b-row cols="12" class="text-left">
+
+                <b-col cols="6">
+                    <b-form-group id="exampleInputGroup1"
+                              label="Email:"
+                              label-for="exampleInput1"
+
+                              description="We'll never share your email with anyone else.">
+                                <b-form-input id="exampleInput1"
+                                            type="email"
+                                            v-model="userInfo.email"
+                                            required
+                                            placeholder="Enter email">
+                                </b-form-input>
+                    </b-form-group>
+                </b-col>
+        </b-row>
+        <b-row class="text-left">
+                <b-col cols="6">
+                    <b-form-group id="exampleInputGroup2"
+                                  label="Password:"
+                                  label-for="exampleInput2">
+                                  <b-form-input id="exampleInput2"
+                                                type="password"
+                                                v-model="userInfo.password"
+                                                required
+                                                placeholder="Enter password">
+                                  </b-form-input>
+                    </b-form-group>
+                </b-col>
+
+                <b-col cols="8">
+                  <b-button @click="goLogin(userInfo)" type="button" variant="primary">Submit</b-button>
+                <b-col>
+
+
+
+
+        </b-row>
+    </b-container>
+</b-form>
   </div>
 </template>
 
@@ -45,17 +63,6 @@ export default {
       })
   },
   methods: {
-        onReset (evt) {
-          evt.preventDefault();
-          /* Reset our form values */
-          this.form.email = '';
-          this.form.name = '';
-          this.form.food = null;
-          this.form.checked = [];
-          /* Trick to reset/clear native browser form validation state */
-          this.show = false;
-          this.$nextTick(() => { this.show = true });
-      },
       ...mapActions({
           goLogin: 'auth/goLogin'
       })
