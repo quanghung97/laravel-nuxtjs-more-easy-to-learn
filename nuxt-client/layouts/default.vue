@@ -11,13 +11,23 @@
     export default {
         data () {
             return {
-                loading: false
+                loading: false,
+                value: 0
             }
+        },
+        mounted () {
+            this.$nextTick(() => {
+              this.$nuxt.$loading.start()
+
+              setTimeout(() => this.$nuxt.$loading.finish(), 1000)
+            })
         },
         created() {
             this.loading = true;
             this.fetchToken()
-                .then(() => {this.loading = false})
+                .then(() => {
+                    this.loading = false
+                })
         },
         methods: {
             ...mapActions({
@@ -74,5 +84,9 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.process-bar {
+    height: 5px;
 }
 </style>

@@ -1,6 +1,10 @@
 const webpack = require('webpack')
 
 module.exports = {
+    loading: {
+        color: 'rgb(244, 146, 66)',
+        height: '5px'
+    },
   head: {
     title: 'nuxt-client',
     meta: [
