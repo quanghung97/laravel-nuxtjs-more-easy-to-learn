@@ -31,7 +31,7 @@ export default {
         async goLogin ({commit}, userInfo) { // when some component call dispatch (action), this method sync data
                 //alert(121);
                 //console.log(userInfo);
-              await axios.post('http://nuxtserver.local/public/api/login', {
+              await axios.post('/login', {
                 email: userInfo.email,
                 password: userInfo.password
               })
@@ -49,7 +49,7 @@ export default {
               });
         },
         async goRegister({commit}, userInfo) {
-            await axios.post('http://nuxtserver.local/public/api/register', {
+            await axios.post('/register', {
                 email: userInfo.email,
                 name: userInfo.name,
                 password: userInfo.password

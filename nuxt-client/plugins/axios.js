@@ -3,6 +3,8 @@ import store from './../store/index'
 
 let instance = axios.create()
 
+axios.defaults.baseURL = 'http://nuxtserver.local/public/api'
+
 if (process.BROWSER_BUILD) {
   const swal = require('sweetalert2')
   instance.interceptors.request.use(
