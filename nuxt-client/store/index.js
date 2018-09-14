@@ -7,11 +7,6 @@ const createStore = () => {
   return new Vuex.Store({
     modules: {
         auth
-    },
-    getters: {
-        authToken (state, getters) {
-            return 'asasas';
-        },
     }
   })
 }

@@ -37,7 +37,7 @@ class AuthController extends Controller
             ],
         ]);
 
-        return response(['data' => json_decode((string) $response->getBody(), true), 'user' => $user]);
+        return response(['data' => json_decode((string) $response->getBody(), true), 'email' => $user->email, 'userName' => $user->name]);
     }
 
     public function login(Request $request)
@@ -64,7 +64,7 @@ class AuthController extends Controller
                 ],
             ]);
 
-            return response(['data' => json_decode((string) $response->getBody(), true)]);
+            return response(['data' => json_decode((string) $response->getBody(), true), 'email' => $user->email, 'userName' => $user->name]);
         }
     }
 }

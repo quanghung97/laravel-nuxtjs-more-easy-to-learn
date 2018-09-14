@@ -5,12 +5,16 @@ let instance = axios.create()
 
 axios.defaults.baseURL = 'http://nuxtserver.local/public/api'
 
+// const token = cookies.get('x-access-token')
+// if (token) setAuthToken(token)
+// else resetAuthToken()
+
 if (process.BROWSER_BUILD) {
   const swal = require('sweetalert2')
   instance.interceptors.request.use(
     (config) => {
-      if (store.getters.authToken) {
-        config.headers.common['Authorization'] = `Bearer ${store.getters.authToken}`
+      if (localStorage.getItem('token')) {
+        config.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
       }
       return config
     },
@@ -25,7 +29,7 @@ if (process.BROWSER_BUILD) {
           title: 'Oops...',
           html: 'Something went wrong! Please try again.'
         })
-      } else if (error.response.status === 401 && store.getters.authUser) {
+      } else if (error.response.status === 401 && store.auth.state.authToken) {
         swal({
           title: 'Session Expired!',
           html: 'Please log in again to continue.',

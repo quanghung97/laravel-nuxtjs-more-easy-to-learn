@@ -16,8 +16,11 @@
     <b-navbar-nav class="ml-auto">
 
          <b-nav-item v-if="!checkLogin" :to="{ name: 'login' }">Login</b-nav-item>
-      <b-nav-item-dropdown v-if="checkLogin" text="User" right>
-        <b-dropdown-item @click.prevent="goLogout">Logout</b-dropdown-item>
+      <b-nav-item-dropdown v-if="checkLogin" right>
+         <template slot="button-content">
+          <em>{{userName}}</em>
+        </template>
+        <b-dropdown-item @click="goLogout">Logout</b-dropdown-item>
       </b-nav-item-dropdown>
 
 
@@ -29,9 +32,11 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 export default {
+
     computed: {
         ...mapState('auth', {
-            checkLogin: state => state.checkLogin
+            checkLogin: state => state.checkLogin,
+            userName: state => state.userName
         })
     },
     methods: {

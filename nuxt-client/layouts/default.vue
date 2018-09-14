@@ -1,12 +1,29 @@
 <template>
   <div>
       <Navbar />
+      <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif">
     <nuxt/>
   </div>
 </template>
 <script>
     import Navbar from './Navbar';
+    import {mapActions} from 'vuex';
     export default {
+        data () {
+            return {
+                loading: false
+            }
+        },
+        created() {
+            this.loading = true;
+            this.fetchToken()
+                .then(() => {this.loading = false})
+        },
+        methods: {
+            ...mapActions({
+                fetchToken: 'auth/fetchToken'
+            })
+        },
         components: {
             Navbar
         }
