@@ -1,8 +1,8 @@
 <template>
   <div>
       <Navbar />
-      <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif">
-    <nuxt/>
+      <img v-if="loading" style="height: 10px" src="https://i.imgur.com/JfPpwOA.gif">
+    <nuxt />
   </div>
 </template>
 <script>
@@ -84,9 +84,5 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
-}
-
-.process-bar {
-    height: 5px;
 }
 </style>
