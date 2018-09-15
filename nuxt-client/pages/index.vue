@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   min-height: 100vh;
   display: flex;
@@ -62,4 +62,3 @@ export default {
   padding-top: 15px;
 }
 </style>
-

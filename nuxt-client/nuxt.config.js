@@ -1,45 +1,55 @@
 const webpack = require('webpack')
 
 module.exports = {
-    loading: {
-        color: 'rgb(244, 146, 66)',
-        height: '5px'
-    },
+  loading: {
+    color: 'rgb(244, 146, 66)',
+    height: '5px'
+  },
   head: {
     title: 'nuxt-client',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      {
+        charset: 'utf-8'
+      }, {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      }, {
+        hid: 'description',
+        name: 'description',
+        content: 'Nuxt.js project'
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {rel: 'stylesheet', type: 'text/css', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'}
-
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      }
     ]
   },
 
-  loading: { color: '#3B8070' },
+  loading: {
+    color: '#3B8070'
+  },
 
-  modules: ['@nuxtjs/axios', 'bootstrap-vue/nuxt'],
+  modules: [
+    '@nuxtjs/axios', 'bootstrap-vue/nuxt'
+  ],
   build: {
-    vendor: ['jquery'],
-    plugins: [
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-      })
+    vendor: [
+      'jquery', 'bootstrap', 'vuetify'
     ],
-    extend (config, { isDev, isClient }) {
+    plugins: [new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery'})],
+    extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+        config.module.rules.push({enforce: 'pre', test: /\.(js|vue)$/, loader: 'eslint-loader', exclude: /(node_modules)/})
       }
     }
-  }
+  },
+  // include bootstrap css
+  css: [
+    'bootstrap/dist/css/bootstrap.css'
+  ],
+  // include bootstrap js on startup
+  plugins: ['~plugins/bootstrap.js', '~plugins/vuetify.js']
 }
