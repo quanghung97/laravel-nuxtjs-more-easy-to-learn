@@ -16,10 +16,12 @@
     <b-navbar-nav class="ml-auto">
 
          <b-nav-item v-if="!checkLogin" :to="{ name: 'login' }">Login</b-nav-item>
+         <b-nav-item v-if="!checkLogin" :to="{ name: 'register' }">Register</b-nav-item>
       <b-nav-item-dropdown v-if="checkLogin" right>
          <template slot="button-content">
           <em>{{userName}}</em>
         </template>
+        <b-dropdown-item @click="profileInfo">Profile</b-dropdown-item>
         <b-dropdown-item @click="goLogout">Logout</b-dropdown-item>
       </b-nav-item-dropdown>
 

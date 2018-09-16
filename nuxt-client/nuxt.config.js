@@ -2,8 +2,8 @@ const webpack = require('webpack')
 
 module.exports = {
   loading: {
-    color: 'rgb(244, 146, 66)',
-    height: '5px'
+    color: '#563d7c',
+    height: '3px'
   },
   head: {
     title: 'nuxt-client',
@@ -26,10 +26,6 @@ module.exports = {
         href: '/favicon.ico'
       }
     ]
-  },
-
-  loading: {
-    color: '#3B8070'
   },
 
   modules: [
