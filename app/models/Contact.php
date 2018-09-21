@@ -3,7 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\models\User;
+use App\Models\User;
 
 class Contact extends Model
 {

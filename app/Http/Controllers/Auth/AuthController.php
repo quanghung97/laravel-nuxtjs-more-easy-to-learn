@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\models\User;
+use App\Repositories\Facades\UserRepository;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Hash;
@@ -18,11 +18,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::firstOrNew(['email'=>$request->email]);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        UserRepository::firstOrNew($request);
 
         $guzzle = new Client;
         //create token for user
@@ -47,7 +43,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = UserRepository::where('email', $request->email)->first();
         if (!$user) {
             return response(['status' => 'error', 'message' => 'User not found']);
         } elseif (Hash::check($request->password, $user->password)) {
