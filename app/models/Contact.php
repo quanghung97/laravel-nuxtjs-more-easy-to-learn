@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\models\User;
 
 class Contact extends Model
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Contact;
+use App\models\Contact;
 
 class User extends Authenticatable
 {
