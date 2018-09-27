@@ -5,6 +5,7 @@ module.exports = {
     color: '#563d7c',
     height: '3px'
   },
+  mode: 'spa',
   head: {
     title: 'nuxt-client',
     meta: [
@@ -27,7 +28,12 @@ module.exports = {
       }
     ]
   },
-
+  /*
+  all router have middleware if config there
+  */
+  // router: {
+  //   middleware: ['authenticated']
+  // },
   modules: [
     '@nuxtjs/axios', 'bootstrap-vue/nuxt'
   ],

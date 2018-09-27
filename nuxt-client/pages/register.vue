@@ -1,6 +1,8 @@
 <template>
     <div class="container top">
-    <div class="row justify-content-center">
+        <h1 v-if="checkLogin">Bạn đã đăng nhập</h1>
+        
+    <div v-if="!checkLogin" class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Register</div>

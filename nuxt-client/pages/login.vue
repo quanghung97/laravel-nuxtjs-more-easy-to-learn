@@ -1,7 +1,7 @@
 <template>
-  <div>
-
-      <b-container>
+  <div >
+      <h1 v-if="checkLogin">Bạn đã đăng nhập</h1>
+      <b-container v-if="!checkLogin">
           <div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -26,7 +26,6 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 export default {
-    middleware: 'notAuthenticate',
     data() {
         return {
             userInfo: {
