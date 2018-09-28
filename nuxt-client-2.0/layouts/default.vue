@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar />
+        <navBar />
         <img
                 v-if="loading"
                 style="height: 10px"
@@ -13,7 +13,7 @@ import navBar from './navBar'
 import { mapActions } from 'vuex'
 export default {
     components: {
-        Navbar
+        navBar
     },
     data() {
         return {

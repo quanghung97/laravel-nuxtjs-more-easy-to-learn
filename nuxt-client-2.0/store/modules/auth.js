@@ -25,16 +25,12 @@ export default {
         }
     },
     actions: {
-        /*
-        1 số cách call API có thể delay khá nhiều thì chúng ta nên sử dụng Promise mới ra của javascript
-        1 số cách viết function mới ES6 là arrow function () => {} và rút gọn khai báo {commit} = context <=> commit = context.commit
-        */
         async fetchToken({ commit, state }) {
             if (localStorage.getItem('token')) {
                 await axios
                     .get('/user', {
                         headers: {
-                            'Authorization': `Bearer ${localStorage.getItem(
+                            Authorization: `Bearer ${localStorage.getItem(
                                 'token'
                             )}`
                         }
@@ -52,10 +48,10 @@ export default {
                 commit('logout')
             }
         },
-
-        async goLogin({ commit, state }, userInfo) { // when some component call dispatch (action), this method sync data
+        async goLogin({ commit, state }, userInfo) {
             if (state.checkLogin == false) {
-                await axios.post('/login', {
+                await axios
+                    .post('/login', {
                         email: userInfo.email,
                         password: userInfo.password
                     })
@@ -67,9 +63,8 @@ export default {
                         localStorage.setItem('userName', response.data.userName)
                         localStorage.setItem('email', response.data.email)
                         commit('logged')
-                    //setAuthToken(token)
-                    //cookies.set('x-access-token', token, {expires: 7})
-                    }).catch(error => {
+                    })
+                    .catch(error => {
                         console.log(error)
                     })
                 this.$router.push({ path: '/about' })
@@ -79,34 +74,37 @@ export default {
         },
         async goRegister({ commit, state }, userInfo) {
             if (state.checkLogin == false) {
-                await axios.post('/register', {
-                    email: userInfo.email,
-                    name: userInfo.name,
-                    password: userInfo.password
-                }).then(response => {
-                    let token = response.data.data.access_token
-                    console.log(token);
+                await axios
+                    .post('/register', {
+                        email: userInfo.email,
+                        name: userInfo.name,
+                        password: userInfo.password
+                    })
+                    .then(response => {
+                        let token = response.data.data.access_token
+                        console.log(token)
 
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('userName', response.data.userName);
-                    localStorage.setItem('email', response.data.email);
-                    commit('registered', token);
-                    commit('logged');
-                    //commit('logged', product.id)
-                }).catch(error => {
-                    console.log(error);
-                });
-                this.$router.push({path: '/about'});
+                        localStorage.setItem('token', token)
+                        localStorage.setItem('userName', response.data.userName)
+                        localStorage.setItem('email', response.data.email)
+                        commit('registered', token)
+                        commit('logged')
+                        //commit('logged', product.id)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$router.push({ path: '/about' })
             } else {
-                this.$router.push({path: '/about'});
+                this.$router.push({ path: '/about' })
             }
         },
-        goLogout({commit, state}) {
+        goLogout({ commit, state }) {
             if (state.checkLogin == true) {
-                commit('logout');
+                commit('logout')
                 //resetAuthToken()
                 //cookies.remove('x-access-token')
-                this.$router.push({path: '/'});
+                this.$router.push({ path: '/' })
             }
         }
     }

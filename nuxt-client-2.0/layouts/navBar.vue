@@ -45,7 +45,7 @@
         </b-collapse>
     </b-navbar>
 </template>
-<script>
+<script scoped>
 import { mapState, mapActions } from 'vuex'
 export default {
     computed: {
